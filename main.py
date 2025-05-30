@@ -3,6 +3,7 @@ import os
 from agno.agent import Agent
 from agno.models.anthropic import Claude
 from agno.playground import Playground, serve_playground_app
+from fastapi.middleware.cors import CORSMiddleware
 
 # Create a minimal agent with Claude
 agent = Agent(
@@ -14,6 +15,21 @@ agent = Agent(
 
 # Create the playground app with our agent
 app = Playground(agents=[agent]).get_app()
+
+# Configure CORS - allow all origins by default for maximum compatibility
+# Users can restrict this by setting CORS_ORIGINS environment variable
+cors_origins = os.getenv("CORS_ORIGINS", "*")
+if cors_origins != "*":
+    # Support comma-separated list of origins
+    cors_origins = [origin.strip() for origin in cors_origins.split(",")]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=cors_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # For Railway deployment
 if __name__ == "__main__":

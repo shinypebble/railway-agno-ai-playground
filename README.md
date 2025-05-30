@@ -148,6 +148,7 @@ python main.py
 |----------|-------------|----------|
 | `ANTHROPIC_API_KEY` | Your Anthropic API key | Yes |
 | `PORT` | Server port (auto-provided by Railway) | No |
+| `CORS_ORIGINS` | Allowed CORS origins (default: `*` allows all). Use comma-separated list for multiple origins | No |
 
 ## 📚 Resources
 
