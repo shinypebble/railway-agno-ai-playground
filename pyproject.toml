@@ -1,0 +1,33 @@
+# pyproject.toml
+[project]
+name = "railway-agno-ai-playground"
+version = "1.0.0"
+description = "One-click Agno AI agent playground deployment for Railway"
+requires-python = ">=3.13"
+dependencies = [
+  "agno>=1.5.6",
+  "anthropic>=0.52.1",
+  "fastapi[standard]>=0.115.12",
+  "filetype>=1.2.0",
+]
+
+[tool.setuptools]
+py-modules = ["main"]
+
+[tool.black]
+line-length = 160
+target-version = ['py313']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
